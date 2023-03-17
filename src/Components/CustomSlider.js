@@ -89,54 +89,56 @@ function CustomSlider(props) {
   }, [isDragging, handleDrag]);
 
   return (
-    <div className="slider" ref={sliderRef}>
-      {Array.from({ length: props.max - props.min }, (v, i) => i).map((i) => {
-        return (
-          <div
-            key={i}
-            className={"slider__tick" + (i % 10 === 0 ? " big" : "")}
-            style={{
-              left: `${(100 / Math.abs(props.max - props.min)) * i}%`,
-            }}
-            onClick={(e) => {
-              setPosition(i + props.min);
-              handleRef.current.style.transform = `translateY(-50%) translateX(calc(${
-                (100 / Math.abs(props.max - props.min)) * i
-              }cqw - 25px)`;
-            }}
-          />
-        );
-      })}
-      <div
-        className="slider__tick big"
-        style={{
-          left: `100%`,
-        }}
-      />
-      <div
-        className="slider__track"
-        style={{
-          width: `${percentage}%`,
-        }}
-      />
-      <button
-        className="handle"
-        ref={handleRef}
-        onMouseDown={(e) => {
-          setIsDragging(true);
-        }}
-        onTouchStart={(e) => {
-          setIsDragging(true);
-        }}
-        onTouchEnd={(e) => {
-          setIsDragging(false);
-        }}
-        onMouseUp={(e) => {
-          setIsDragging(false);
-        }}
-      >
-        {Math.round(position)}
-      </button>
+    <div className="slider-container">
+      <div className="slider" ref={sliderRef}>
+        {Array.from({ length: props.max - props.min }, (v, i) => i).map((i) => {
+          return (
+            <div
+              key={i}
+              className={"slider__tick" + (i % 10 === 0 ? " big" : "")}
+              style={{
+                left: `${(100 / Math.abs(props.max - props.min)) * i}%`,
+              }}
+              onClick={(e) => {
+                setPosition(i + props.min);
+                handleRef.current.style.transform = `translateY(-50%) translateX(calc(${
+                  (100 / Math.abs(props.max - props.min)) * i
+                }cqw - 25px)`;
+              }}
+            />
+          );
+        })}
+        <div
+          className="slider__tick big"
+          style={{
+            left: `100%`,
+          }}
+        />
+        <div
+          className="slider__track"
+          style={{
+            width: `${percentage}%`,
+          }}
+        />
+        <button
+          className="handle"
+          ref={handleRef}
+          onMouseDown={(e) => {
+            setIsDragging(true);
+          }}
+          onTouchStart={(e) => {
+            setIsDragging(true);
+          }}
+          onTouchEnd={(e) => {
+            setIsDragging(false);
+          }}
+          onMouseUp={(e) => {
+            setIsDragging(false);
+          }}
+        >
+          {Math.round(position)}
+        </button>
+      </div>
     </div>
   );
 }

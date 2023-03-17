@@ -3,17 +3,19 @@
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-
   padding: 25px 0 50px 0;
   width: 100vw;
   overflow-x: hidden;
   z-index: -1;
-  height: calc(100vh - 75px);
+  min-height: calc(100vh - 75px);
+  height: fit-content;
 
   font-family: monospace;
 }
+
 body,
 html {
+  color-scheme: dark;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
@@ -26,6 +28,11 @@ input {
   border-bottom: rgb(105, 105, 105) 1pt solid;
   color: white;
   font-family: monospace;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  min-width: none;
+  width: fill-available;
 }
 pre {
   color: rgb(105, 105, 105);
@@ -53,7 +60,7 @@ label:before {
 .control-panel-container {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: start;
   justify-content: space-between;
 
   top: 50px;
@@ -62,6 +69,7 @@ label:before {
 .control-panel {
   top: 50px;
   width: 250px;
+  min-width: none;
   padding: 25px;
   border: 1pt solid white;
   border-radius: 5px;
@@ -101,4 +109,37 @@ label:before {
   position: absolute;
   left: 25px;
   bottom: 25px;
+  display: flex;
+  align-items: end;
+  gap: 5px;
+  color: rgb(105, 105, 105);
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: calc(100vw - 100px);
+  height: fit-content;
+  gap: 75px;
+}
+
+.flex-container-small {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: fit-content;
+
+  gap: 25px;
+}
+
+@media (max-width: 768px) {
+  .flex-container {
+    flex-direction: column;
+    gap: 25px;
+  }
 }
