@@ -7,8 +7,9 @@
   padding: 25px 0 50px 0;
   width: 100vw;
   overflow-x: hidden;
+  z-index: -1;
   height: calc(100vh - 75px);
-  user-select: none;
+
   font-family: monospace;
 }
 body,
@@ -36,6 +37,7 @@ pre {
 label {
   text-transform: uppercase;
   position: relative;
+  z-index: 1;
 }
 label:before {
   content: "";

@@ -12,7 +12,11 @@ function CustomSlider(props) {
 
   const handleDrag = useCallback(
     (e) => {
-      const offset = e.clientX - sliderRef.current.getBoundingClientRect().left;
+      e.preventDefault();
+      e.stopPropagation();
+      var x = e.clientX ?? e.touches[0].clientX;
+
+      const offset = x - sliderRef.current.getBoundingClientRect().left;
 
       var localPercentage = (offset / sliderRef.current.clientWidth) * 100;
 
