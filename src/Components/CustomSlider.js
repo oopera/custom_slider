@@ -73,8 +73,13 @@ function CustomSlider(props) {
         window.addEventListener("mouseup", () => {
           setIsDragging(false);
         });
+        window.addEventListener("touchmove", handleDrag);
+        window.addEventListener("touchend", () => {
+          setIsDragging(false);
+        });
       } else {
         window.removeEventListener("mousemove", handleDrag);
+        window.removeEventListener("touchmove", handleDrag);
       }
     }
   }, [isDragging, handleDrag]);
@@ -115,6 +120,12 @@ function CustomSlider(props) {
         ref={handleRef}
         onMouseDown={(e) => {
           setIsDragging(true);
+        }}
+        onTouchStart={(e) => {
+          setIsDragging(true);
+        }}
+        onTouchEnd={(e) => {
+          setIsDragging(false);
         }}
         onMouseUp={(e) => {
           setIsDragging(false);
