@@ -9,7 +9,7 @@
   z-index: -1;
   min-height: calc(100vh - 75px);
   height: fit-content;
-  gap: 5px;
+  gap: 25px;
   font-family: monospace;
 }
 
@@ -37,7 +37,7 @@ input {
 pre {
   color: rgb(105, 105, 105);
   font-family: monospace;
-  font-size: 10pt;
+  font-size: 10px;
   transition: 350ms cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
@@ -71,8 +71,8 @@ label:before {
   width: 250px;
   min-width: none;
   padding: 25px;
-  border: 1pt solid white;
-  border-radius: 5px;
+  border: 1pt solid rgb(105, 105, 105);
+
   display: flex;
   color: white;
   flex-direction: column;
@@ -81,18 +81,19 @@ label:before {
 
 .hyphen {
   width: calc(50vw - 175px);
-  height: 1px;
-  background-color: rgb(105, 105, 105);
+  height: 0px;
+
+  box-shadow: 0 0 0 0.5px rgb(105, 105, 105);
   position: relative;
 }
 .hyphen:before {
   content: "";
   position: absolute;
-  width: 1px;
+  width: 0px;
   height: 50px;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgb(105, 105, 105);
+  box-shadow: 0 0 0 0.5px rgb(105, 105, 105);
   left: 0;
 }
 .hyphen:first-of-type:before {
@@ -133,15 +134,13 @@ label:before {
   align-items: center;
   width: 20%;
   height: fit-content;
-}
-.flex-container-small > div {
-  margin-bottom: -25px;
+  gap: 25px;
 }
 
 @media (max-width: 768px) {
   .flex-container {
     flex-direction: column;
-    gap: 5px;
+    gap: 25px;
   }
   .flex-container-small {
     width: 100%;

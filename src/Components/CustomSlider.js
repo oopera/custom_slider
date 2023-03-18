@@ -21,11 +21,19 @@ function CustomSlider(props) {
       var localPercentage = (offset / sliderRef.current.clientWidth) * 100;
 
       if (localPercentage < 0) {
+        setPosition(props.min);
+        handleRef.current.style.transform = `translateY(-50%) translateX(calc(00cqw - 25px)`;
         localPercentage = 0;
+        setPercentage(localPercentage);
+        return;
       }
 
       if (localPercentage > 100) {
+        setPosition(props.max);
+        handleRef.current.style.transform = `translateY(-50%) translateX(calc(100cqw - 25px)`;
         localPercentage = 100;
+        setPercentage(localPercentage);
+        return;
       }
 
       if (props.steps !== "0") {
@@ -37,21 +45,10 @@ function CustomSlider(props) {
       }
 
       setPercentage(localPercentage);
-
-      if (offset < 0) {
-        setPosition(props.min);
-        handleRef.current.style.transform = `translateY(-50%) translateX(calc(00cqw - 25px)`;
-        return;
-      } else if (offset > sliderRef.current.clientWidth) {
-        setPosition(props.max);
-        handleRef.current.style.transform = `translateY(-50%) translateX(calc(100cqw - 25px)`;
-        return;
-      } else {
-        setPosition(
-          ((props.max - props.min) / 100) * localPercentage + Number(props.min)
-        );
-        handleRef.current.style.transform = `translateY(-50%) translateX(calc(${localPercentage}cqw  - 25px)`;
-      }
+      setPosition(
+        ((props.max - props.min) / 100) * localPercentage + Number(props.min)
+      );
+      handleRef.current.style.transform = `translateY(-50%) translateX(calc(${localPercentage}cqw  - 25px)`;
     },
     [props.max, props.min, props.steps]
   );
@@ -89,56 +86,58 @@ function CustomSlider(props) {
   }, [isDragging, handleDrag]);
 
   return (
-    <div className="slider-container">
-      <div className="slider" ref={sliderRef}>
-        {Array.from({ length: props.max - props.min }, (v, i) => i).map((i) => {
-          return (
-            <div
-              key={i}
-              className={"slider__tick" + (i % 10 === 0 ? " big" : "")}
-              style={{
-                left: `${(100 / Math.abs(props.max - props.min)) * i}%`,
-              }}
-              onClick={(e) => {
-                setPosition(i + props.min);
-                handleRef.current.style.transform = `translateY(-50%) translateX(calc(${
-                  (100 / Math.abs(props.max - props.min)) * i
-                }cqw - 25px)`;
-              }}
-            />
-          );
-        })}
-        <div
-          className="slider__tick big"
-          style={{
-            left: `100%`,
-          }}
-        />
-        <div
-          className="slider__track"
-          style={{
-            width: `${percentage}%`,
-          }}
-        />
-        <button
-          className="handle"
-          ref={handleRef}
-          onMouseDown={(e) => {
-            setIsDragging(true);
-          }}
-          onTouchStart={(e) => {
-            setIsDragging(true);
-          }}
-          onTouchEnd={(e) => {
-            setIsDragging(false);
-          }}
-          onMouseUp={(e) => {
-            setIsDragging(false);
-          }}
-        >
-          {Math.round(position)}
-        </button>
-      </div>
+    <div className="slider" ref={sliderRef}>
+      {Array.from({ length: props.max - props.min }, (v, i) => i).map((i) => {
+        return (
+          <div
+            key={i}
+            className={
+              "slider__tick" +
+              (i % 10 === 0 ? " big" : i % 5 === 0 ? " medium" : "")
+            }
+            style={{
+              left: `${(100 / Math.abs(props.max - props.min)) * i}%`,
+            }}
+            onClick={(e) => {
+              setPosition(i + props.min);
+              handleRef.current.style.transform = `translateY(-50%) translateX(calc(${
+                (100 / Math.abs(props.max - props.min)) * i
+              }cqw - 25px)`;
+            }}
+          />
+        );
+      })}
+      <div
+        className="slider__tick big"
+        style={{
+          left: `100%`,
+        }}
+      />
+      <div
+        className="slider__track"
+        style={{
+          width: `${percentage}%`,
+        }}
+      />
+      <button
+        className="handle"
+        ref={handleRef}
+        onMouseDown={(e) => {
+          setIsDragging(true);
+        }}
+        onTouchStart={(e) => {
+          setIsDragging(true);
+        }}
+        onTouchEnd={(e) => {
+          setIsDragging(false);
+        }}
+        onMouseUp={(e) => {
+          setIsDragging(false);
+        }}
+      >
+        <p>{Math.round(props.max)}</p>
+        <p>{Math.round(position)}</p>
+      </button>
     </div>
   );
 }
