@@ -1,11 +1,26 @@
 import "./App.css";
 import CustomSlider from "./Components/CustomSlider";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 function App() {
   const [steps, setSteps] = useState(5);
   const [min, setMin] = useState(Number(-5));
   const [max, setMax] = useState(55);
+  const [min2, setMin2] = useState(Number(-5));
+  const [max2, setMax2] = useState(55);
   const [sliderValue, setSliderValue] = useState(0);
+  useEffect(() => {
+    // var interval = setInterval(() => {
+    setMin(Math.round(Math.random() * 5) - 10);
+    setMax(Math.round(Math.random() * 150) + 50);
+    //   setTimeout(() => {
+    setMin2(Math.round(Math.random() * 5));
+    setMax2(Math.round(Math.random() * 150) + 25);
+    //   }, 500);
+    // }, 750);
+    // return () => {
+    //   clearInterval(interval);
+    // };
+  }, []);
   return (
     <div className="App">
       <div className="control-panel-container">
@@ -49,23 +64,27 @@ function App() {
       </div>
       <div className="flex-container">
         <div className="flex-container">
-          <CustomSlider min={0} max={150} steps={1} />
+          <CustomSlider min={Number(min / 5)} max={max} steps={steps * 2} />
         </div>
         <div className="flex-container">
-          <CustomSlider min={15} max={25} steps={steps} />
+          <CustomSlider min={Number(min / 5)} max={max} steps={steps * 2} />
         </div>
       </div>
 
       <div className="flex-container">
         <div className="flex-container-small">
-          <CustomSlider min={0} max={150} steps={1} />
-          <CustomSlider min={Number(min)} max={max} steps={steps} />
-          <CustomSlider min={15} max={25} steps={steps} />
+          <CustomSlider
+            min={Number(min * 2)}
+            max={max2 * 2}
+            steps={steps / 4}
+          />
+          <CustomSlider min={Number(min2)} max={max / 3} steps={steps} />
+          <CustomSlider min={Number(min / 5)} max={max} steps={steps * 2} />
         </div>
         <div className="flex-container-small">
-          <CustomSlider min={0} max={150} steps={1} />
-          <CustomSlider min={15} max={25} steps={steps} />
-          <CustomSlider min={Number(min)} max={max} steps={steps} />
+          <CustomSlider min={Number(min / 5)} max={max2} steps={steps * 2} />
+          <CustomSlider min={Number(min / 5)} max={max} steps={steps * 2} />
+          <CustomSlider min={Number(min2)} max={max} steps={steps} />
         </div>
       </div>
 
