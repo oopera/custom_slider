@@ -9,7 +9,7 @@
   z-index: -1;
   min-height: calc(100vh - 75px);
   height: fit-content;
-
+  gap: 5px;
   font-family: monospace;
 }
 
@@ -140,6 +140,9 @@ label:before {
 @media (max-width: 768px) {
   .flex-container {
     flex-direction: column;
-    gap: 25px;
+    gap: 5px;
+  }
+  .App {
+    justify-content: flex-start;
   }
 }
