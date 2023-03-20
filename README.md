@@ -1,6 +1,5 @@
 # custom-slider
 
 Note: 
+- The sliders, bar the first one, are all for show. Expect unexpected behavior, their prop calculations are not safe. 
 
-- Changing the Props can lead to unexpected behavior for the second and following sliders. 
-  - This is due to type conversions on some calculations for the props. 
